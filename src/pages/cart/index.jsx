@@ -2,11 +2,15 @@ import useProductStore from "../../stores/product-store"
 import { ButtonBuy, CardStyled, Container, Contents, PriceFooter, TextEmpty, TotalPriceText } from "./styles";
 import Navbar from "../../components/navbar";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
+import moment from "moment";
 
 const index = () => {
     const cartList = useProductStore(state => state.cart);
     const buyProducts = useProductStore(state => state.addToTransaction);
     const [totalPrice, setTotalPrice] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         var price = 0;
@@ -22,17 +26,20 @@ const index = () => {
             productItems.push(element.title);
         });
         const products = {
+          id: uuidv4(),
           productsName: productItems,
           totalPrice: totalPrice,
+          createdAt: moment().format("DD-MM-YYYY hh:mm:ss")
         };
-        console.log(products);
         buyProducts(products)
+        alert("Pembelian Berhasil!")
+        navigate(-1)
     }
 
     return (
         <>
             <Container>
-                <Navbar back title={"Test"}/>
+                <Navbar back title={"Cart"}/>
                 <Contents>
                     {cartList.length === 0 ? <TextEmpty>Belum ada product<br></br>yang ditambahkan</TextEmpty> :
                     cartList.map((item, index) => (
