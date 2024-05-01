@@ -37,9 +37,26 @@ const useProductStore = create((set) => ({
       alert("Item already in cart");
       return state.cart;
     } else {
+      item.quantity = 1;
       alert("Produk berhasil dimasukkan ke keranjang");
       return { cart: [item, ...state.cart] };
     }
+  }),
+  addCartQuantity: (index) => set((state) => {
+    var newList = [];
+    state.cart.forEach(element => {
+      newList.push(element);
+    });
+    newList[index].quantity += 1;
+    return { cart: [...newList] };
+  }),
+  removeCartQuantity: (index) => set((state) => {
+    var newList = [];
+    state.cart.forEach(element => {
+      newList.push(element);
+    });
+    newList[index].quantity -= 1;
+    return { cart: [...newList] };
   }),
   transactionHistories: [],
   addToTransaction: (item) => set((state) => ({ transactionHistories: [...state.transactionHistories, item] }))
