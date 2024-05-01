@@ -13,7 +13,7 @@ const index = () => {
 
     return (
         <div>
-        <Navbar title="E-COMMERCE" />
+        <Navbar title="M/O Shop" />
 
         <Container>
             {listProduct.map ((item, index) => (

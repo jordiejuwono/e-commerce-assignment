@@ -65,6 +65,9 @@ const useProductStore = create((set) => ({
     });
     return { cart: [...newList] };
   }),
+  removeAllFromCart: () => set((state) => {
+    return { cart: [] };
+  }),
   transactionHistories: [],
   addToTransaction: (item) => set((state) => ({ transactionHistories: [...state.transactionHistories, item] }))
 }))

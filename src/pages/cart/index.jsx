@@ -12,6 +12,7 @@ const index = () => {
     const addQuantity = useProductStore(state => state.addCartQuantity);
     const removeQuantity = useProductStore(state => state.removeCartQuantity);
     const removeFromCart = useProductStore(state => state.removeFromCart);
+    const removeAllFromCart = useProductStore(state => state.removeAllFromCart);
     const [totalPrice, setTotalPrice] = useState(0);
     const navigate = useNavigate();
 
@@ -40,15 +41,16 @@ const index = () => {
     const handleBuyProducts = (items, totalPrice) => {
         var productItems = [];
         items.forEach(element => {
-            productItems.push(element.title);
+            productItems.push(element);
         });
         const products = {
           id: uuidv4(),
-          productsName: productItems,
+          products: productItems,
           totalPrice: totalPrice,
           createdAt: moment().format("DD-MM-YYYY hh:mm:ss")
         };
         buyProducts(products)
+        removeAllFromCart()
         alert("Pembelian Berhasil!")
         navigate(-1)
     }
