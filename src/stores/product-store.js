@@ -58,6 +58,13 @@ const useProductStore = create((set) => ({
     newList[index].quantity -= 1;
     return { cart: [...newList] };
   }),
+  removeFromCart: () => set((state) => {
+    var newList = [];
+    state.cart.forEach(element => {
+      newList.pop(element);
+    });
+    return { cart: [...newList] };
+  }),
   transactionHistories: [],
   addToTransaction: (item) => set((state) => ({ transactionHistories: [...state.transactionHistories, item] }))
 }))

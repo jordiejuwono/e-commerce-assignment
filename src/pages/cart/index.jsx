@@ -11,6 +11,7 @@ const index = () => {
     const buyProducts = useProductStore(state => state.addToTransaction);
     const addQuantity = useProductStore(state => state.addCartQuantity);
     const removeQuantity = useProductStore(state => state.removeCartQuantity);
+    const removeFromCart = useProductStore(state => state.removeFromCart);
     const [totalPrice, setTotalPrice] = useState(0);
     const navigate = useNavigate();
 
@@ -30,6 +31,10 @@ const index = () => {
     const handleRemoveQuantity = (index) => {
         removeQuantity(index);
         setTotalPrice(totalPrice - cartList[index].price);
+    };
+
+    const handleRemoveFromCart = (index) => {
+        removeFromCart();
     };
 
     const handleBuyProducts = (items, totalPrice) => {
@@ -58,8 +63,10 @@ const index = () => {
                         <CardStyled 
                         key={String(index)}
                         showMinusButton={item.quantity > 1}
+                        showRemoveButton={item.quantity == 1}
                         onPlusToggled={() => handleAddQuantity(index)}
                         onMinusToggled={() => handleRemoveQuantity(index)}
+                        onRemoveToggled={() => handleRemoveFromCart()}
                         quantity={String(item.quantity)}
                         {...item}
                         />
