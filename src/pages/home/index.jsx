@@ -1,3 +1,34 @@
+import Navbar from '../../components/navbar/index';
+import { Container } from './styles';
+import useProductStore from '../../stores/product-store';
+import Card from '../../components/card';
+
 const index = () => {
-    
+    const listProduct = useProductStore(state => state.products);
+    const addToCart = useProductStore(state => state.addToCart);
+
+    const handleAdd = (item) => {
+        addToCart(item)
+        alert("Produk berhasil ditambahkan ke keranjang")
+    }
+
+    return (
+        <div>
+        <Navbar title="E-COMMERCE" />
+
+        <Container>
+            {listProduct.map ((item, index) => (
+                <Card 
+                  image={item.image}
+                  title={item.title}
+                  price={item.price}
+                  key={String(index)}
+                  onClickAdd={() => handleAdd(item)}
+                />
+            ))}
+        </Container>
+        </div>
+    )
 }
+
+export default index;
