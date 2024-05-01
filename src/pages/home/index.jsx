@@ -9,7 +9,6 @@ const index = () => {
 
     const handleAdd = (item) => {
         addToCart(item)
-        alert("Produk berhasil ditambahkan ke keranjang")
     }
 
     return (
@@ -19,6 +18,7 @@ const index = () => {
         <Container>
             {listProduct.map ((item, index) => (
                 <Card 
+                  buttonAdd
                   image={item.image}
                   title={item.title}
                   price={item.price}

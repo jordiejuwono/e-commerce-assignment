@@ -10,8 +10,14 @@ export const Container = styled.div`
     height: 56px;
 `;
 
+export const TitleContainer = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: horizontal;
+`;
+
 export const Title = styled.h1`
     font-size: 20px;
     color: #000000;
-    flex: 1;
+    margin-left: 8px;
 `;
